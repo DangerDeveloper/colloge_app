@@ -1,68 +1,14 @@
 import 'dart:io';
 
 import 'package:collogeapp/pages/pdf_view_page.dart';
+import 'package:collogeapp/provider/pdfs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-class UnitTopicDownloadPage extends StatefulWidget {
-  @override
-  _UnitTopicDownloadPageState createState() => _UnitTopicDownloadPageState();
-}
-
-class _UnitTopicDownloadPageState extends State<UnitTopicDownloadPage> {
-  String urlPDFPath = "";
-  String assetPDFPath = "";
-
-  Future<File> getFileFromUrl(String url) async {
-    try {
-      var data = await http.get(url);
-      var bytes = data.bodyBytes;
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/mypdfonline.pdf");
-
-      File urlFile = await file.writeAsBytes(bytes);
-      return urlFile;
-    } catch (e) {
-      throw Exception("Error opening url file");
-    }
-  }
-
-  Future<File> getFileFromAsset(String asset) async {
-    try {
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/mypdf.pdf");
-
-      File assetFile = await file.writeAsBytes(bytes);
-      return assetFile;
-    } catch (e) {
-      throw Exception("Error opening asset file");
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getFileFromAsset("assets/mypdf.pdf").then((f) {
-      setState(() {
-        assetPDFPath = f.path;
-        print(assetPDFPath);
-      });
-    });
-
-    getFileFromUrl("http://www.pdf995.com/samples/pdf.pdf").then((f) {
-      setState(() {
-        urlPDFPath = f.path;
-        print(urlPDFPath);
-      });
-    });
-  }
-
+class UnitTopicDownloadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<PdfS>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -125,19 +71,51 @@ class _UnitTopicDownloadPageState extends State<UnitTopicDownloadPage> {
                 width: double.infinity,
                 height: 100,
                 child: ListTile(
-                  onTap: () {
-                    if (urlPDFPath != null) {
+                  onTap: () async {
+                    await data.getFileFromUrl();
+                    var x = data.urlPDFPath;
+                    if (x != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PdfViewPage(path: assetPDFPath),
+                          builder: (ctx) => PdfViewPage(
+                            path: x,
+                          ),
                         ),
-                      );
+                      ).then((_) {
+                        data.deletFromUrl();
+                      });
+                    } else {
+                      print('Somthing Went Wrong.');
                     }
                   },
                   title: Text('Medicine'),
-                  trailing: Icon(Icons.file_download),
+                  trailing: IconButton(
+                    icon: Icon(Icons.file_download),
+                    onPressed: () async {
+                      await data.downloadPdf();
+                      print('download pdf and save to local dard drive.');
+                    },
+                  ),
                 ),
+              ),
+              ListTile(
+                title: Text('data'),
+                onTap: () async {
+                  var x = data.assetPDFPath;
+                  if (x != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => PdfViewPage(
+                          path: x,
+                        ),
+                      ),
+                    );
+                  } else {
+                    print('fuck');
+                  }
+                },
               ),
             ],
           ),

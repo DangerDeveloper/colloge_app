@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
-
 class PdfViewPage extends StatefulWidget {
   final String path;
   const PdfViewPage({this.path});

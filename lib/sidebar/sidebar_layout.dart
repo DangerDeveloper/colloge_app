@@ -1,5 +1,6 @@
 import 'package:collogeapp/logic/page_route_logic.dart';
 import 'package:collogeapp/pages/templete.dart';
+import 'package:collogeapp/provider/pdfs.dart';
 import 'package:provider/provider.dart';
 
 import './sidebar.dart';
