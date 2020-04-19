@@ -26,6 +26,7 @@ class PdfPage extends StatelessWidget {
       ),
       body: DirectSelectContainer(
         child: Column(
+
           children: <Widget>[
             ConstantText('Select Semester'),
             SizedBox(
