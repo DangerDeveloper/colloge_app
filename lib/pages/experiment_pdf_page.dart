@@ -1,7 +1,8 @@
 import 'package:collogeapp/data.dart';
+import 'package:collogeapp/logic/select_dropdown_chapter_pdf.dart';
 import 'package:collogeapp/widget/drop_down_pdf.dart';
-import 'package:direct_select_flutter/direct_select_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExperimentPdfPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
@@ -13,6 +14,7 @@ class ExperimentPdfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<SelectDropDownChapterPDF>(context);
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
@@ -23,77 +25,7 @@ class ExperimentPdfPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: DirectSelectContainer(
-        child: Column(
-          children: <Widget>[
-            ConstantText('Select Semester'),
-            SizedBox(
-              height: 3,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: (width * 0.12) > 70 ? 80 : ((width * 0.12) + 20),
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: DropDownPDF(
-                  scaffoldKey: _showScaffold,
-                  list: semester,
-                ),
-              ),
-            ),
-            SizedBox(height: 5.0),
-            ConstantText('Select Subject'),
-            SizedBox(height: 3.0),
-            Container(
-              alignment: Alignment.center,
-              height: (width * 0.12) > 70 ? 80 : ((width * 0.12) + 20),
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: DropDownPDF(
-                  scaffoldKey: _showScaffold,
-                  list: subject,
-                ),
-              ),
-            ),
-            SizedBox(height: 5.0),
-            ConstantText('Select Unit'),
-            SizedBox(height: 3.0),
-            Container(
-              alignment: Alignment.center,
-              height: (width * 0.12) > 70 ? 80 : ((width * 0.12) + 20),
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: DropDownPDF(
-                  scaffoldKey: _showScaffold,
-                  list: unit,
-                ),
-              ),
-            ),
-            SizedBox(height: 25.0),
-            Container(
-              width: double.infinity,
-              height: width * 0.13,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  textColor: Colors.white,
-                  color: Colors.blueGrey,
-                  onPressed: () {},
-                  child: Text('CLICK HEAR',style: TextStyle(
-                    fontSize: 20.0,
-                  ),),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: Center(),
     );
   }
 }

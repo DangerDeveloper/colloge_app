@@ -1,3 +1,4 @@
+import 'package:collogeapp/logic/select_dropdown_chapter_pdf.dart';
 import 'package:collogeapp/pages/articles.dart';
 import 'package:collogeapp/pages/experiment_pdf_page.dart';
 import 'package:collogeapp/pages/pdf_page.dart';
@@ -23,20 +24,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (ctx) => PdfS(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.white,
+      child: ChangeNotifierProvider(
+        create: (ctxx) => SelectDropDownChapterPDF(),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.white,
+          ),
+          home: SideBarLayout(),
+          routes: {
+            ROUTES.ARTICLES_ROUTE: (ctx) => Articles(),
+            ROUTES.PDF_PAGE_ROUTE: (ctx) => PdfPage(),
+            ROUTES.EXPERIMENT_PDF_PAGE: (ctx) => ExperimentPdfPage(),
+            ROUTES.UNIT_TOPIC_PAGE: (ctx) => UnitTopicPage(),
+            ROUTES.UNIT_TOPIC_DOWNLOAD_PAGE: (ctx) => UnitTopicDownloadPage(),
+          },
         ),
-        home: SideBarLayout(),
-        routes: {
-          ROUTES.ARTICLES_ROUTE: (ctx) => Articles(),
-          ROUTES.PDF_PAGE_ROUTE: (ctx) => PdfPage(),
-          ROUTES.EXPERIMENT_PDF_PAGE: (ctx) => ExperimentPdfPage(),
-          ROUTES.UNIT_TOPIC_PAGE: (ctx) => UnitTopicPage(),
-          ROUTES.UNIT_TOPIC_DOWNLOAD_PAGE: (ctx) => UnitTopicDownloadPage(),
-        },
       ),
     );
   }

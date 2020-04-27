@@ -1,9 +1,13 @@
+import 'package:collogeapp/logic/select_dropdown_chapter_pdf.dart';
 import 'package:collogeapp/routs/routs.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UnitTopicPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<SelectDropDownChapterPDF>(context);
+    List<String> semester = data.semester;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -20,98 +24,35 @@ class UnitTopicPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-                      child: Text('Pharmacognosy',style: TextStyle(fontSize: 20.0,color: Colors.black),),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                      child: Text(
+                        'Pharmacognosy',
+                        style: TextStyle(fontSize: 20.0, color: Colors.black),
+                      ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-                      child: Text('Unit: 1',style: TextStyle(fontSize: 16.0,color: Colors.black54),),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                      child: Text(
+                        'Unit: 1',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 6.0),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {
-                        Navigator.of(context).pushNamed(ROUTES.UNIT_TOPIC_DOWNLOAD_PAGE);
-                      },
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                    ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                    ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                    ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                    ListTile(
-                      title: Text('Medicine'),
-                      subtitle: Text('By dr B.V.Gupta'),
-                      onTap: () {},
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ListView.builder(
+              shrinkWrap: true,
+                itemCount: semester.length,
+                itemBuilder: (ctx, int) {
+                  return ListTile(
+                    title: Text('Title'),
+                    subtitle: Text('subtitle'),
+                    onTap: () {},
+                  );
+                }),
           ],
         ),
       ),
