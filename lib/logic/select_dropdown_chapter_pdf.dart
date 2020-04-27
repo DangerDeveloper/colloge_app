@@ -55,6 +55,8 @@ class SelectDropDownChapterPDF extends ChangeNotifier {
     notifyListeners();
   }
 
+  // at last i want to send List<String> because in pdf_page.dart i use list to render widget
+  // for creating a drop down list
   List<String> get semester {
     // try this logic to extract data from map which is complicated for me
     List<String> addProduct = [];
